@@ -1,7 +1,7 @@
-DevOps Project - Kastro
+DevOps Project - Satya
 Deployment of ZOMATO Project
 --------------------------------------------
-Repo URL: https://github.com/KastroVKiran/DevOps-Project-Zomato-Kastro.git
+Repo URL: https://github.com/Satya-jit/Zomato-Kubernetes.git
 
 
 1. Launch an Instance (Ubuntu, 24.04, t2.large, 30 GB)
@@ -134,7 +134,7 @@ pipeline {
         }
         stage ("Git Checkout") {
             steps {
-                git 'https://github.com/KastroVKiran/Zomato-Project-Kastro.git'
+                git 'https://github.com/Satya-jit/Zomato-Kubernetes.git'
             }
         }
         stage("Sonarqube Analysis"){
@@ -177,8 +177,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker') {
-                        sh "docker tag zomato kastrov/zomato:latest "
-                        sh "docker push kastrov/zomato:latest "
+                        sh "docker tag zomato satya490/zomato:latest "
+                        sh "docker push satya490/zomato:latest "
                     }
                 }
             }
@@ -187,16 +187,16 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker-scout quickview kastrov/zomato:latest'
-                       sh 'docker-scout cves kastrov/zomato:latest'
-                       sh 'docker-scout recommendations kastrov/zomato:latest'
+                       sh 'docker-scout quickview satya490/zomato:latest'
+                       sh 'docker-scout cves satya490/zomato:latest'
+                       sh 'docker-scout recommendations satya490/zomato:latest'
                    }
                 }
             }
         }
         stage ("Deploy to Container") {
             steps {
-                sh 'docker run -d --name zomato -p 3000:3000 kastrov/zomato:latest'
+                sh 'docker run -d --name zomato -p 3000:3000 satya490/zomato:latest'
             }
         }
     }
@@ -219,7 +219,7 @@ pipeline {
                 </body>
                 </html>
             """,
-            to: 'kastrokiran@gmail.com',
+            to: 'satyajitdas0033.com',
             mimeType: 'text/html',
             attachmentsPattern: 'trivy.txt'
         }
@@ -707,10 +707,4 @@ Copy the public ip of "nodeIP" which we have done exactly 4 steps above this lin
 Note: If you see error in Prometheus under "k8s", open port number 9100 for the EC2 instances which were created as part of EKS cluster i.e nodes
 
 After everything is done. Delete everything. Make sure to delete the Cloud Formation Stacks.
-
-========================================================================================================
-Kind Request:
-Once after you have successfully deployed the App, kindly share your experience on LinkedIn by Tagging me and also provide the YouTube link of this project in your post, as it helps others to access the video quickly. 
-========================================================================================================
-												HAPPY LEARNING
 
